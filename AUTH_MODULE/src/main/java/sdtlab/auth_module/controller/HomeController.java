@@ -21,7 +21,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/home")
+    @GetMapping("/login/home")
     public String home(@AuthenticationPrincipal OAuth2User principal, Model model) {
         // Add user name to the model
         User user = userService.createUser(principal);

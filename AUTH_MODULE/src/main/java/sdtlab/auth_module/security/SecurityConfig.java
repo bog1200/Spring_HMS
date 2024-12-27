@@ -17,13 +17,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @SuppressWarnings("removal")
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 // Authorize requests
+                .csrf().disable()
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/", "/login", "/oauth2/**").permitAll()
+                                .requestMatchers("/", "/login", "/oauth2/**", "/actuator/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 // Configure OAuth2 login
@@ -33,8 +35,17 @@ public class SecurityConfig {
                                         authorizationEndpoint
                                                 .authorizationRequestResolver(pkceResolver(null))
                                 )
-                                .loginPage("/login")
-                                .defaultSuccessUrl("/home", true)
+                                .loginPage("http://localhost:8080/login")
+                                .failureUrl("http://localhost:8080/login?error")
+                                .defaultSuccessUrl("http://localhost:8080/login/home", true)
+
+                )
+                // Configure logout
+                .logout(logout ->
+                        logout
+                                .logoutUrl("/logout").permitAll()
+
+                                .logoutSuccessUrl("http://localhost:8080/login")
                 );
         return http.build();
     }
