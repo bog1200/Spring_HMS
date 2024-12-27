@@ -1,0 +1,1 @@
+package sdtlab.patient_module.domain;public enum Roles {    ROLE_PATIENT, ROLE_DOCTOR, ROLE_PROVIDER}
