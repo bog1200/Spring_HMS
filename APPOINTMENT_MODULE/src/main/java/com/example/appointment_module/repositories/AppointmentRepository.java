@@ -1,0 +1,1 @@
+package com.example.appointment_module.repositories;import com.example.appointment_module.domain.Appointment;import org.springframework.data.repository.CrudRepository;public interface AppointmentRepository extends CrudRepository<Appointment, Long> {}
