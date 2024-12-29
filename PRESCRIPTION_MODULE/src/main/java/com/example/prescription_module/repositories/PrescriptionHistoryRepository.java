@@ -1,0 +1,1 @@
+package com.example.prescription_module.repositories;import com.example.prescription_module.domain.PrescriptionHistory;import org.springframework.data.repository.CrudRepository;import org.springframework.stereotype.Repository;@Repositorypublic interface PrescriptionHistoryRepository extends CrudRepository<PrescriptionHistory, Long> {}
