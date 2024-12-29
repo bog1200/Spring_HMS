@@ -1,0 +1,1 @@
+package sdtlab.patient_module.services;import sdtlab.patient_module.domain.Doctor;import java.util.List;import java.util.Optional;public interface DoctorService {    List<Doctor> findAll();    Optional<Doctor> findById(Long id);    Doctor save(Doctor doctor);    Doctor update(Doctor doctor);    void delete(Long id);}

@@ -1,0 +1,1 @@
+package sdtlab.patient_module.repositories;import org.springframework.data.repository.CrudRepository;import sdtlab.patient_module.domain.Patient;import org.springframework.stereotype.Repository;@Repositorypublic interface PatientRepository extends CrudRepository<Patient, Long> {}
