@@ -1,0 +1,77 @@
+services:
+  gateway:
+    networks:
+        - gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+    extends:
+      file: GATEWAY\docker-compose.yml
+      service: gateway-module
+
+
+  eureka:
+    networks:
+        - gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+    extends:
+        file: EUREKA_SERVER\docker-compose.yml
+        service: eureka-module
+
+  patient:
+      networks:
+        - gateway
+        - patient
+      environment:
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      depends_on:
+        - eureka
+        - gateway
+        - patient-mariadb
+      extends:
+            file: PATIENT_MODULE\docker-compose.yml
+            service: patient-module
+
+  patient-mariadb:
+      networks:
+        - patient
+      extends:
+        file: PATIENT_MODULE\docker-compose.yml
+        service: patient-mariadb
+
+  appointment:
+      networks:
+        - gateway
+        - appointment
+      environment:
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka
+      depends_on:
+        - eureka
+        - gateway
+        - appointment-mariadb
+      extends:
+            file: APPOINTMENT_MODULE\docker-compose.yml
+            service: appointment-module
+
+  appointment-mariadb:
+      networks:
+          - appointment
+      extends:
+          file: APPOINTMENT_MODULE\docker-compose.yml
+          service: appointment-mariadb
+
+
+networks:
+  gateway: {
+    driver: bridge
+  }
+  patient: {
+    driver: bridge
+  }
+  appointment: {
+    driver: bridge
+  }
+
+volumes:
+  patient-data: {}
+  appointment-data: {}

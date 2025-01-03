@@ -1,0 +1,6 @@
+services:
+  eureka-module:
+    image: bog1200/spring_hms/eureka
+    build: .
+    ports:
+      - "8761:8761"

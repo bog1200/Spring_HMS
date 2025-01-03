@@ -1,0 +1,22 @@
+services:
+  patient-mariadb:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=patient
+    networks:
+        - patient
+    volumes:
+      - patient-data:/var/lib/mysql
+  patient-module:
+    image: bog1200/spring_hms/patient
+    build: .
+    networks:
+      - patient
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://patient-mariadb:3306/patient
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - EUREKA_INSTANCE_HOSTNAME=patient
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=false
+    depends_on:
+      - patient-mariadb

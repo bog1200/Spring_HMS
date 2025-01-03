@@ -1,0 +1,28 @@
+services:
+  appointment-mariadb:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=appointment
+    networks:
+        - appointment
+    volumes:
+      - appointment-data:/var/lib/mysql
+  appointment-module:
+    image: bog1200/spring_hms/appointment
+    build: .
+    networks:
+      - appointment
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://appointment-mariadb:3306/appointment
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - EUREKA_INSTANCE_HOSTNAME=appointment
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=false
+    depends_on:
+      - appointment-mariadb
+
+volumes:
+    appointment-data: {}
+networks:
+    appointment: {}
+

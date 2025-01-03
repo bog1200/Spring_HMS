@@ -1,0 +1,7 @@
+services:
+  gateway-module:
+    image: bog1200/spring_hms/gateway
+    build: .
+    ports:
+      - "8080:8080"
+
