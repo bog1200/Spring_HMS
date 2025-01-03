@@ -25,7 +25,9 @@ public class WebSocketMessageScheduler {
         Optional<Set<Appointment>> appointments = appointmentService.findStartingAppointments();
         Appointment test = new Appointment(123L, 10L, Timestamp.from(new Date().toInstant()), AppointmentType.SURGERY);
         test.setId(1L);
-        messagingTemplate.convertAndSend("/topic/123", test);
+        messagingTemplate.convertAndSend("/topic/"+test.getIdPatient(), test);
+        messagingTemplate.convertAndSend("/topic/"+test.getIdDoctor(), test);
+
         appointments.ifPresent(appointmentSet -> {
             for (Appointment appointment : appointmentSet) {
                 messagingTemplate.convertAndSend("/topic/"+appointment.getIdPatient(), appointment);
