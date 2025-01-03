@@ -1,35 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WebSocket Auctions</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Notification System</title>
 </head>
 <body>
+<h1>Notification System</h1>
+
 <div id="loginForm">
     <input type="text" id="usernameInput" placeholder="Enter your username...">
-    <button id="loginButton">Login</button>
+    <button id="connectButton">Connect</button>
 </div>
-<div id="addAuction" style="display: none">
-    <h2>Create Auction</h2>
-    <input type="text" id="auctionNameInput" placeholder="Enter product name...">
-    <br>
-    <input type="number" id="auctionPriceInput" placeholder="Enter product price...">
-    <br>
-    <label for="auctionEndDateInput">Auction end time:</label>
-    <br>
-    <input type="datetime-local" id="auctionEndDateInput">
-    <br>
-    <button id="createAuctionButton">Create</button>
-</div>
-<div id="auctions" style="display: none;">
-    <h2>Auctions</h2>
-    <div id="auctionsList"></div>
-    <div id="sendBid">
-        <h2>Send Bid</h2>
-        <input type="number" id="bidIDInput" placeholder="Enter auction ID...">
-        <input type="number" id="bidAmountInput" placeholder="Enter bid amount...">
-        <button type="button" id="sendBidButton">Send</button>
-    </div>
+
+<div id="notificationArea" style="display: none;">
+    <h2>Notifications</h2>
+    <ul id="notificationsList"></ul>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
