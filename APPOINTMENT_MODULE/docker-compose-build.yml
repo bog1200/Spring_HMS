@@ -3,6 +3,6 @@ services:
     image: mariadb:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=courses
+      - MYSQL_DATABASE=appointment
     ports:
-      - "3306:3306"
+      - "33062:3306"
