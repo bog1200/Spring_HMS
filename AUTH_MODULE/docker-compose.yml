@@ -1,0 +1,4 @@
+services:
+  auth-module:
+    image: bog1200/spring_hms/auth
+    build: .
